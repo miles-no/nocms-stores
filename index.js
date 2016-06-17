@@ -1,7 +1,7 @@
 const events = require('nocms-events');
 const stores = {};
 
-const create = (name, value, func) => {
+const createStore = (name, value, func) => {
   let initialValue = value;
   let cb = func;
   if (typeof initialValue === 'function') {
@@ -47,7 +47,7 @@ const update = (name, obj) => {
 };
 
 module.exports = {
-  create,
+  createStore,
   remove,
   get,
   subscribe,
