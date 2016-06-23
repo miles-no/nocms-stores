@@ -1,5 +1,15 @@
+'use strict';
+
 const events = require('nocms-events');
 const stores = {};
+
+const subscribe = (name, func) => {
+  events.listenTo(`store:${name}`, func);
+};
+
+const unsubscribe = (name, func) => {
+  events.stopListenTo(`store:${name}`, func);
+};
 
 const createStore = (name, value, func) => {
   let initialValue = value;
@@ -12,26 +22,18 @@ const createStore = (name, value, func) => {
     stores[name] = initialValue || {};
   }
   if (typeof cb === 'function') {
-    this.subscribe(name, cb);
+    subscribe(name, cb);
   }
 };
 
 const remove = (name, func) => {
   delete stores[name];
   if (typeof func === 'function') {
-    this.unsubscribe(name, func);
+    unsubscribe(name, func);
   }
 };
 
-const get = (name) => stores[name];
-
-const subscribe = (name, func) => {
-  events.listenTo(`store:${name}`, func);
-};
-
-const unsubscribe = (name, func) => {
-  events.stopListenTo(`store:${name}`, func);
-};
+const getStore = (name) => stores[name];
 
 const update = (name, obj) => {
   if (!stores[name]) {
@@ -49,7 +51,7 @@ const update = (name, obj) => {
 module.exports = {
   createStore,
   remove,
-  get,
+  getStore,
   subscribe,
   unsubscribe,
   update,
