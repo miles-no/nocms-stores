@@ -1,5 +1,3 @@
-'use strict';
-
 const events = require('nocms-events');
 const stores = {};
 
