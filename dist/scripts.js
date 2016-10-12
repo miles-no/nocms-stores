@@ -103,7 +103,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Object.keys(obj).forEach(function (prop) {
 	    stores[name][prop] = obj[prop];
 	  });
-	  events.trigger('store:' + name, stores[name]);
+	  events.trigger('store:' + name, stores[name], obj);
 	};
 
 	module.exports = {

@@ -43,7 +43,7 @@ const update = (name, obj) => {
   Object.keys(obj).forEach((prop) => {
     stores[name][prop] = obj[prop];
   });
-  events.trigger(`store:${name}`, stores[name]);
+  events.trigger(`store:${name}`, stores[name], obj);
 };
 
 module.exports = {
