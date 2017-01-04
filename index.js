@@ -1,4 +1,5 @@
 const events = require('nocms-events');
+
 const stores = {};
 
 const subscribe = (name, func) => {
@@ -31,7 +32,7 @@ const remove = (name, func) => {
   }
 };
 
-const getStore = (name) => stores[name];
+const getStore = name => stores[name];
 
 const update = (name, obj) => {
   if (!stores[name]) {
