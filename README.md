@@ -5,7 +5,7 @@ Stores for NoCMS forms.
 
 ## Installation
 
-Install nocms-stores from NPM and include it in your own React build process (using [Browserify](http://browserify.org), [Webpack](http://webpack.github.io/), etc).
+Install nocms-stores from NPM and include it in your own React build and minification process (using [Browserify](http://browserify.org), [Webpack](http://webpack.github.io/), etc).
 
 ```
 npm install nocms-stores --save
