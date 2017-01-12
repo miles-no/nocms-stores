@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/nocms/nocms-stores.git"
+    "url": "https://github.com/miles-no/nocms-stores.git"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
