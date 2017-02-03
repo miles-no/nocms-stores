@@ -17,9 +17,13 @@ const createStore = (name, value, func) => {
     cb = initialValue;
     initialValue = {};
   }
+
   if (!stores[name]) {
     stores[name] = initialValue || {};
+  } else {
+    stores[name] = Object.assign(initialValue, stores[name]);
   }
+
   if (typeof cb === 'function') {
     subscribe(name, cb);
   }
