@@ -11,7 +11,7 @@ const unsubscribe = (name, func) => {
 };
 
 const createStore = (name, value, func) => {
-  let initialValue = value;
+  let initialValue = value || {};
   let cb = func;
   if (typeof initialValue === 'function') {
     cb = initialValue;
