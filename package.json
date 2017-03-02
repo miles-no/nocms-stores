@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "bump-version": "./node_modules/bump-version/bin/bump patch",
     "prepublish": "babel ./src --out-dir ./lib --source-maps --presets es2015"
   },
   "repository": {
@@ -20,7 +21,7 @@
     "eslint-plugin-import": "^2.2.0"
   },
   "dependencies": {
-    "nocms-events": "git+https://github.com/miles-no/nocms-events.git"
+    "nocms-events": "^0.1.2"
   },
   "author": "",
   "license": "ISC",
