@@ -23,7 +23,7 @@
     "semantic-release": "^6.3.6"
   },
   "dependencies": {
-    "nocms-events": "^0.1.2"
+    "nocms-events": "^1.0.0"
   },
   "author": "",
   "license": "ISC",
