@@ -54,7 +54,6 @@ const update = (name, obj) => {
 const clearStore = (store) => {
   delete stores[store];
   events.trigger(`store:${store}`, {}, {});
-  events.clearEvent(`store:${store}`);
 };
 
 const clearAll = () => {
