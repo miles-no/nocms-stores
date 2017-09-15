@@ -4,7 +4,7 @@
   "description": "Stores objects for NoCMS",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node test/",
     "bump-version": "./node_modules/bump-version/bin/bump patch",
     "prepublish": "babel ./src --out-dir ./lib --source-maps --presets es2015",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
@@ -20,10 +20,11 @@
     "eslint": "^3.12.2",
     "eslint-config-webteam": "^1.1.1",
     "eslint-plugin-import": "^2.2.0",
-    "semantic-release": "^6.3.6"
+    "semantic-release": "^6.3.6",
+    "tape": "^4.8.0"
   },
   "dependencies": {
-    "nocms-events": "^1.0.0"
+    "nocms-events": "^1.1.0"
   },
   "author": "",
   "license": "ISC",

@@ -19,7 +19,7 @@ const createStore = (name, value, func) => {
   }
 
   if (!stores[name]) {
-    stores[name] = initialValue || {};
+    stores[name] = Object.assign({}, initialValue) || {};
   } else {
     stores[name] = Object.assign(initialValue, stores[name]);
   }
@@ -51,6 +51,16 @@ const update = (name, obj) => {
   events.trigger(`store:${name}`, stores[name], obj);
 };
 
+const clearStore = (store) => {
+  delete stores[store];
+  events.trigger(`store:${store}`, {}, {});
+  events.clearEvent(`store:${store}`);
+};
+
+const clearAll = () => {
+  Object.keys(stores).forEach(clearStore);
+};
+
 module.exports = {
   createStore,
   remove,
@@ -58,4 +68,6 @@ module.exports = {
   subscribe,
   unsubscribe,
   update,
+  clearAll,
+  clearStore,
 };
