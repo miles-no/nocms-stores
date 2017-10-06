@@ -53,7 +53,6 @@ const patch = (name, obj) => {
       stores[name][prop][field] = obj[prop][field];
     });
   });
-  events.trigger(`store:${name}`, stores[name], stores[name]);
 }
 
 const update = (name, obj) => {
