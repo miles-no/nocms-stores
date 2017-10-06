@@ -38,11 +38,26 @@ const remove = (name, func) => {
 
 const getStore = name => stores[name];
 
-const update = (name, obj) => {
-  if (!stores[name]) {
+const patch = (name, obj) => {
+  if (!stores[name] || obj === null) {
     return;
   }
-  if (obj === null) {
+  Object.keys(obj).forEach((prop) => {
+    if (typeof obj[prop] !== 'object') {
+      return;
+    }
+    if (typeof stores[name][prop] === 'undefined') {
+      stores[name][prop] = {};
+    }
+    Object.keys(obj[prop]).forEach((field) => {
+      stores[name][prop][field] = obj[prop][field];
+    });
+  });
+  events.trigger(`store:${name}`, stores[name], stores[name]);
+}
+
+const update = (name, obj) => {
+  if (!stores[name] || obj === null) {
     return;
   }
   Object.keys(obj).forEach((prop) => {
@@ -69,4 +84,5 @@ module.exports = {
   update,
   clearAll,
   clearStore,
+  patch,
 };

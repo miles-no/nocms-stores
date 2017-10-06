@@ -52,6 +52,18 @@ test('store subscription with additonal subscriber, should both be called', (t) 
   sut.remove('foo', callback);
 });
 
+test('patch store should not change existing data', (t) => {
+  t.plan(1);
+  sut = require('../lib');
+  const value = { field: { foo: 2, bar: 1, baz: 3 }};
+  const callback = (store, update) => {
+    t.deepEquals(update.field, { foo: 1, bar: 1, baz: 3});
+  };
+  sut.createStore('foo', value, callback);
+  sut.patch('foo', { field: { foo: 1 }});
+  sut.remove('foo', callback);
+});
+
 test('clear store should update with empty object before removing event listener', (t) => {
   t.plan(1);
   sut = require('../lib');
