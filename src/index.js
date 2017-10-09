@@ -52,6 +52,7 @@ const patch = (name, obj) => {
     Object.keys(obj[prop]).forEach((field) => {
       stores[name][prop][field] = obj[prop][field];
     });
+    events.trigger(`store:${name}`, stores[name], obj);
   });
 }
 
