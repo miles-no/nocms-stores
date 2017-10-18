@@ -1,8 +1,8 @@
 const test = require('tape');
+
 let sut;
 
 test('create empty store', (t) => {
-
   t.plan(1);
 
   sut = require('../lib');
@@ -11,7 +11,6 @@ test('create empty store', (t) => {
 });
 
 test('create store with initial value', (t) => {
-
   t.plan(1);
 
   sut = require('../lib');
@@ -55,11 +54,11 @@ test('store subscription with additonal subscriber, should both be called', (t) 
 test('patch store should not change existing data', (t) => {
   t.plan(1);
   sut = require('../lib');
-  const value = { field: { foo: 2, bar: 1, baz: 3 }};
+  const value = { field: { foo: 2, bar: 1, baz: 3 } };
   sut.createStore('foo', value);
-  sut.patch('foo', { field: { foo: 1 }});
+  sut.patch('foo', { field: { foo: 1 } });
   const store = sut.getStore('foo');
-  t.deepEquals(store.field, { foo: 1, bar: 1, baz: 3});
+  t.deepEquals(store.field, { foo: 1, bar: 1, baz: 3 });
   sut.remove('foo');
 });
 

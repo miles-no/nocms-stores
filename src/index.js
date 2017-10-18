@@ -36,7 +36,7 @@ const remove = (name, func) => {
   }
 };
 
-const getStore = name => stores[name];
+const getStore = (name) => { return stores[name]; };
 
 const patch = (name, obj) => {
   if (!stores[name] || obj === null) {
@@ -54,7 +54,7 @@ const patch = (name, obj) => {
     });
   });
   events.trigger(`store:${name}`, stores[name], obj);
-}
+};
 
 const update = (name, obj) => {
   if (!stores[name] || obj === null) {
