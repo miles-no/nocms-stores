@@ -91,3 +91,20 @@ test('clear all should update and remove all stores', (t) => {
   sut.update('foo2', value);
   sut.update('foo3', value);
 });
+
+test('patch store should trigger event with the whole field value and the changes', (t) => {
+  t.plan(2);
+  sut = require('../lib');
+  const value = { bar: 1 };
+  let hasBeenCalledOnce = false;
+  const callback = (store, changes) => {
+    if (!hasBeenCalledOnce) {
+      t.deepEquals(store, { foo: { value: 1 }, bar: 1 }, 'Store patched');
+      t.deepEquals(changes, { foo: { value: 1 }}, 'Store patched with changes');
+      hasBeenCalledOnce = true;
+    }
+  };
+  sut.createStore('foo4', value, callback);
+  sut.patch('foo4', { foo: { value: 1 }});
+  sut.clearStore('foo4');
+});
