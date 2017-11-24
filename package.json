@@ -24,7 +24,7 @@
     "tape": "^4.8.0"
   },
   "dependencies": {
-    "nocms-events": "^1.1.0"
+    "nocms-events": "^1.2.0"
   },
   "author": "",
   "license": "ISC",

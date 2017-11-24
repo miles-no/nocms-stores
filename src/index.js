@@ -1,13 +1,13 @@
-const events = require('nocms-events');
+const { listenToGlobal, stopListenToGlobal, triggerGlobal } = require('nocms-events');
 
 const stores = {};
 
 const subscribe = (name, func) => {
-  events.listenTo(`store:${name}`, func);
+  listenToGlobal(`store:${name}`, func);
 };
 
 const unsubscribe = (name, func) => {
-  events.stopListenTo(`store:${name}`, func);
+  stopListenToGlobal(`store:${name}`, func);
 };
 
 const createStore = (name, value, func) => {
@@ -53,7 +53,7 @@ const patch = (name, obj) => {
       stores[name][prop][field] = obj[prop][field];
     });
   });
-  events.trigger(`store:${name}`, stores[name], obj);
+  triggerGlobal(`store:${name}`, stores[name], obj);
 };
 
 const update = (name, obj) => {
@@ -63,12 +63,12 @@ const update = (name, obj) => {
   Object.keys(obj).forEach((prop) => {
     stores[name][prop] = obj[prop];
   });
-  events.trigger(`store:${name}`, stores[name], obj);
+  triggerGlobal(`store:${name}`, stores[name], obj);
 };
 
 const clearStore = (store) => {
   delete stores[store];
-  events.trigger(`store:${store}`, {}, {});
+  triggerGlobal(`store:${store}`, {}, {});
 };
 
 const clearAll = () => {
