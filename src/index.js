@@ -31,6 +31,7 @@ const createStore = (name, value, func) => {
 
 const deleteStore = (name) => {
   delete stores[name];
+  
   clearEventGlobal(`store:${name}`);
 };
 
