@@ -108,3 +108,23 @@ test('patch store should trigger event with the whole field value and the change
   sut.patch('foo4', { foo: { value: 1 }});
   sut.clearStore('foo4');
 });
+
+
+test('removing store identified by wildcard should remove all matching stores', (t) => {
+  t.plan(2);
+
+  sut = require('../src');
+  const callback1 = (store, update) => { if(update.patched) { t.fail('cleared callback 1 called');} };
+  const callback2 = (store, update) => { if(update.patched) { t.pass('cleared callback 1 called');} };
+
+  sut.createStore('foo-1-1', { foo: '1-1', patched: false }, callback1);
+  sut.createStore('foo-1-2', { foo: '1-2', patched: false }, callback1);
+  sut.createStore('foo-2-1', { foo: '2-1', patched: false }, callback2);
+
+  const result = sut.remove('foo-1*');
+
+  sut.patch('foo-1-1', { patched: true });
+  sut.patch('foo-1-2', { patched: true });
+  sut.patch('foo-2-1', { patched: true });
+  t.pass();
+});

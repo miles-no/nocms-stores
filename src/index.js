@@ -29,10 +29,21 @@ const createStore = (name, value, func) => {
   }
 };
 
-const remove = (name, func) => {
+const deleteStore = (name) => {
   delete stores[name];
-  if (typeof func === 'function') {
-    unsubscribe(name, func);
+  events.clearEventGlobal(`store:${name}`);
+};
+
+const remove = (name) => {
+  if (name.substr(-1) === '*') {
+    const prefix = name.substr(0, name.length - 1);
+    Object.keys(stores).filter((store) => {
+      return store.indexOf(prefix) === 0;
+    }).forEach((store) => {
+      deleteStore(store);
+    });
+  } else {
+    deleteStore(name);
   }
 };
 
