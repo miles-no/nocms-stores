@@ -1,4 +1,4 @@
-const { listenToGlobal, stopListenToGlobal, triggerGlobal } = require('nocms-events');
+const { listenToGlobal, stopListenToGlobal, triggerGlobal, clearEventGlobal } = require('nocms-events');
 
 const stores = {};
 
@@ -31,7 +31,7 @@ const createStore = (name, value, func) => {
 
 const deleteStore = (name) => {
   delete stores[name];
-  events.clearEventGlobal(`store:${name}`);
+  clearEventGlobal(`store:${name}`);
 };
 
 const remove = (name) => {
