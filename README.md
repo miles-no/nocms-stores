@@ -16,31 +16,67 @@ npm install nocms-stores --save
 
 ## Usage
 
-```
+```js
 import stores from 'nocms-stores';
+const initialValue = { name: 'Jørgen' };
 
-stores.createStore(props.store, props.initialState, this.handleStoreChange);
+const handleStoreChange = (store, changes) => {
+  // do something
+};
+
+stores.createStore('my-store', initialValue, handleStoreChange);
 ```
 
-## API
+### `createStore(name[, initialValue, func])`
+```js 
+createStore('my-store', { name: 'Jørgen' }, handleChangeFunc);
+```
+This creates the store assiciated with the given name, `my-store` in the example.
+You can optionally pass an object containing values that the store will be initialized with.
+Use the final argument, `func` for your convenience to subscribe to store chsnges.
 
-### createStore(name, value, func)
-Create a store with the given name and/or default value and/or callback function
+### The callback function
+```js
+const handleStoreChange = (store, changes) => {
+  // do something
+};
+```
+The callback functions are invoked when a store is updated, using the `update` function.
+The store argument contains the entire store and all it's values, whereas the changes argument
+contains the values invoking the change.
 
-### remove(name, func)
-Delete store and optionally unsubscribe from the given function
+### `subscribe(name, func)`
+Listen to changes on the given store, meaning that the callback function, `func` is invoked
+for every update.
 
-### getStore(name)
-Returns the store with the given name
+### `remove(name)`
+Delete store and unsubscribe all associated subscribers.
 
-### subscribe(name, func)
-Listen to events on the given store by calling the function
+### `getStore(name)`
+Returns the store with the given name.
 
-### unsubscribe(name, func)
-Stop listen to events on the given store
+### `unsubscribe(name, func)`
+Detatch a subscriber function from a given store. The store itself is not changed.
 
-### update(name, obj)
-Update store
+### `update(name, obj)`
+Update one or more fields in the store with the values from `obj`.
+```js
+let store = stores.getStore('my-store'); // { name: 'Jørgen' }
+stores.update('my-store', { role: 'developer' });
+let store = stores.getStore('my-store'); // { name: 'Jørgen', role: 'developer' }
+```
+
+### `clearStore(name)`
+Delete the values in a store. The store is reinitiated with an empty object and subscibers
+are notified with the change.
+```js
+store.subscribe('my-store', (store, change) => {
+  // store = {}, change = {}
+});
+store.clearStore('my-store');
+```
+### `clearAll()`
+Delete the values of all stores. Can be useful if a user changes her context by logging out, etc.
 
 ## Commit message format and publishing
 
