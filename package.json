@@ -20,11 +20,11 @@
     "eslint-config-webteam": "^2.0.0",
     "eslint-plugin-import": "^2.11.0",
     "nsp": "^3.2.1",
-    "semantic-release": "^15.1.7",
     "tape": "^4.9.0"
   },
   "dependencies": {
-    "nocms-events": "^1.2.0"
+    "nocms-events": "^1.2.0",
+    "semantic-release": "^15.1.7"
   },
   "author": "",
   "license": "ISC",
